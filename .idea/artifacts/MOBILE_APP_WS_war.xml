@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MOBILE-APP-WS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="MOBILE-APP-WS.war">
+      <element id="artifact" artifact-name="MOBILE-APP-WS:war exploded" />
+    </root>
+  </artifact>
+</component>
