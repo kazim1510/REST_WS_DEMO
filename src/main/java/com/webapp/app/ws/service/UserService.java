@@ -7,4 +7,6 @@ public interface UserService {
     public UserDTO createUser(UserDTO user);
 
     public UserDTO getUser(String userId);
+
+    public UserDTO getUserByUserName(String userName);
 }

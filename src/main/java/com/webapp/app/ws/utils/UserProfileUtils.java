@@ -78,5 +78,9 @@ public class UserProfileUtils {
         }
     }
 
+    public byte[] encrypt(String password, String accesTokenMaterial) throws InvalidKeySpecException{
+        return hash(password.toCharArray(), accesTokenMaterial.getBytes());
+    }
+
 
 }

@@ -13,4 +13,6 @@ public interface DAO {
     UserDTO getUser(String userId);
 
     UserDTO saveUser(UserDTO userName);
+
+    void updateUser(UserDTO userDTO);
 }

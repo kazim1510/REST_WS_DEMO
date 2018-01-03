@@ -5,6 +5,7 @@ public enum ErrorMessages {
     MISSING_REQUIRED_FIELD("Missing required fields. Please check documenation for required fields"),
     RECORD_ALREADY_EXIST("Record already exist"),
     NO_RECORD_FOUND("No Record Found"),
+    AUTHENTICATION_FAILED("Login failed"),
     INTERNAL_SERVER_ERROR("Internal Server Error");
 
     private String errorMessages;
