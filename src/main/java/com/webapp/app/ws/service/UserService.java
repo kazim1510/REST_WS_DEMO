@@ -1,12 +1,20 @@
 package com.webapp.app.ws.service;
 
+import java.util.List;
+
 import com.webapp.app.ws.shared.dto.UserDTO;
 
 public interface UserService {
 
-    public UserDTO createUser(UserDTO user);
+    UserDTO createUser(UserDTO user);
 
-    public UserDTO getUser(String userId);
+    UserDTO getUser(String userId);
 
-    public UserDTO getUserByUserName(String userName);
+    UserDTO getUserByUserName(String userName);
+
+    List<UserDTO> getUsers(int start, int limit);
+
+    void updateUser(UserDTO user);
+
+    void deleteUser(UserDTO user);
 }

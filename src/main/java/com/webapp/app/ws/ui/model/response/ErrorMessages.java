@@ -6,11 +6,13 @@ public enum ErrorMessages {
     RECORD_ALREADY_EXIST("Record already exist"),
     NO_RECORD_FOUND("No Record Found"),
     AUTHENTICATION_FAILED("Login failed"),
+    COULD_NOT_UPDATE("Could not update record"),
+    COULD_NOT_DELETE("Could not delete record"),
     INTERNAL_SERVER_ERROR("Internal Server Error");
 
     private String errorMessages;
 
-    ErrorMessages(String errorMessages){
+    ErrorMessages(String errorMessages) {
         this.errorMessages = errorMessages;
     }
 

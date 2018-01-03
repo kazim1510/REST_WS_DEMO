@@ -1,5 +1,6 @@
 package com.webapp.app.ws.io.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -101,6 +102,38 @@ public class MYSQLDAO implements DAO {
         session.update(userEntity);
         session.getTransaction().commit();
 
+    }
+
+    @Override
+    public List<UserDTO> getUsers(int start, int limit) {
+        List<UserDTO> returnValue = null;
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+
+        CriteriaQuery<UserEntity> criteriaQuery = cb.createQuery(UserEntity.class);
+
+        Root<UserEntity> profileRoot = criteriaQuery.from(UserEntity.class);
+        criteriaQuery.select(profileRoot);
+
+        List<UserEntity> searchResults = session.createQuery(criteriaQuery).setFirstResult(start).setMaxResults(limit).getResultList();
+
+        returnValue = new ArrayList<>();
+        for (UserEntity userEntity : searchResults) {
+            UserDTO userDTO = new UserDTO();
+            BeanUtils.copyProperties(userEntity, userDTO);
+            returnValue.add(userDTO);
+        }
+
+        return returnValue;
+    }
+
+    @Override
+    public void deleteUser(UserDTO userDTO) {
+        UserEntity userEntity = new UserEntity();
+
+        BeanUtils.copyProperties(userDTO, userEntity);
+        session.beginTransaction();
+        session.delete(userEntity);
+        session.getTransaction().commit();
     }
 
 

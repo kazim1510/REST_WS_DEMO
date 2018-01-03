@@ -1,5 +1,9 @@
 package com.webapp.app.ws.service.impl;
 
+import java.util.List;
+
+import com.webapp.app.ws.exceptions.CouldNotDeleteRecordException;
+import com.webapp.app.ws.exceptions.CouldNotUpdateRecordException;
 import com.webapp.app.ws.exceptions.NoRecordFoundException;
 import com.webapp.app.ws.exceptions.UserServiceException;
 import com.webapp.app.ws.io.dao.DAO;
@@ -19,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     UserProfileUtils userProfileUtils = new UserProfileUtils();
 
+    @Override
     public UserDTO createUser(UserDTO user) {
         UserDTO userDTO = null;
 
@@ -61,6 +66,7 @@ public class UserServiceImpl implements UserService {
         return userDTO;
     }
 
+    @Override
     public UserDTO getUserByUserName(String userName) {
         UserDTO userDTO = null;
 
@@ -77,6 +83,57 @@ public class UserServiceImpl implements UserService {
 
         return userDTO;
 
+    }
+
+    @Override
+    public List<UserDTO> getUsers(int start, int limit) {
+        List<UserDTO> returnValue = null;
+
+        try {
+            this.database.openConnection();
+            returnValue = this.database.getUsers(start, limit);
+        } finally {
+
+            this.database.closeConnection();
+        }
+
+        return returnValue;
+    }
+
+    @Override
+    public void updateUser(UserDTO user) {
+
+        try {
+            database.openConnection();
+            database.updateUser(user);
+        } catch (Exception ex) {
+            throw new CouldNotUpdateRecordException(ErrorMessages.COULD_NOT_UPDATE.getErrorMessages());
+        } finally {
+            database.closeConnection();
+        }
+    }
+
+    @Override
+    public void deleteUser(UserDTO user) {
+
+        try {
+            this.database.openConnection();
+            this.database.deleteUser(user);
+        } catch (Exception ex) {
+            throw new CouldNotUpdateRecordException(ErrorMessages.COULD_NOT_UPDATE.getErrorMessages());
+        } finally {
+            this.database.closeConnection();
+        }
+
+        try {
+            user = getUser(user.getUserId());
+        } catch (NoRecordFoundException ex) {
+            user = null;
+        }
+
+        if (user != null) {
+            throw new CouldNotDeleteRecordException(ErrorMessages.COULD_NOT_DELETE.getErrorMessages());
+        }
     }
 
     private UserDTO saveUser(UserDTO user) {
