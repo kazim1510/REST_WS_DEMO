@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.BeanUtils;
 
+import com.webapp.app.ws.annotations.Secured;
 import com.webapp.app.ws.service.UserService;
 import com.webapp.app.ws.service.impl.UserServiceImpl;
 import com.webapp.app.ws.shared.dto.UserDTO;
@@ -36,6 +37,7 @@ public class UserEntryPoint {
         return returnModel;
     }
 
+    @Secured
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
