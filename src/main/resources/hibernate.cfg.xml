@@ -8,7 +8,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mobile_app</property>
         <property name="connection.username">localhost</property>
-        <property name="connection.password">Kajim_123</property>
+        <property name="connection.password">abc123</property>
 
         <property name="hibernate.id.new_generater_mappings">true</property>
         <property name="show_sql">true</property>
